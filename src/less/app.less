@@ -1,0 +1,45 @@
+// Mixins
+
+
+// Variables
+@sx-blue: #1593ca;
+@sx-green: #56aa54;
+@sx-orange: #f1a15c;
+
+// Styles
+body {
+  font-family: 'Inconsolata', monospace;
+}
+
+#title-bar {
+  background-image: url('../img/titlebg.jpg');
+  background-size: cover;
+  color: white;
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  border-bottom: 8px solid @sx-blue;
+
+  #title {
+    text-shadow: #000 0px 0px 5px;
+  }
+}
+
+#edit-config {
+  padding-top: 15px;
+  padding-left: 120px;
+  padding-right: 120px;
+
+  button {
+    width: 190px;
+  }
+
+  .dir-name {
+    margin-left: 45px;
+  }
+
+  #edit-config-update {
+    text-align: center;
+  }
+}
