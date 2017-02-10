@@ -15,8 +15,6 @@ export default function(state = Map(), action) {
   switch (action.type) {
     case 'SET_DIRECTORY':
       return setDirectories(state, action.dirType, action.dirName);
-  }
-  switch (action.type) {
     case 'TOGGLE_CONFIG':
       return toggleConfig(state);
   }

@@ -5,6 +5,8 @@ import Button from 'muicss/lib/react/button';
 
 export default class EditConfig extends React.Component {
   onClick(e) {
+    e.preventDefault();
+
     document.querySelectorAll(".progress-bar > span").forEach( el => {
       if (el.style.width) {
         el.style.width = (parseFloat(el.style.width) + 10) + "%";

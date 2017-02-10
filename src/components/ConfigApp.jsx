@@ -3,13 +3,12 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../action_creators';
 
-
 import TitleBar from './TitleBar';
 import EditConfig from './EditConfig';
 
 export class ConfigApp extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {

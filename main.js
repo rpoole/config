@@ -1,5 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 
+import registerEvents from './src/ipc/main';
+
 let mainWindow = null;
 
 app.on('window-all-closed', () => {
@@ -16,4 +18,5 @@ app.on('ready', () => {
   });
 
   mainWindow.webContents.openDevTools();
+  registerEvents();
 });
