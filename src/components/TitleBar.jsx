@@ -10,7 +10,7 @@ export default class TitleBar extends React.Component {
 
   render() {
     return <div id="title-bar">
-      <h1 id="title"> SX Config App </h1>
+      <h1 id="title"> SX Config Manager </h1>
       <Button > 
         Add New Property
       </Button>

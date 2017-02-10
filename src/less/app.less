@@ -8,7 +8,7 @@
 
 // Styles
 body {
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Nunito', sans-serif;
 }
 
 #title-bar {
@@ -17,29 +17,61 @@ body {
   color: white;
   font-weight: bold;
   padding-top: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   text-align: center;
-  border-bottom: 8px solid @sx-blue;
+  border-bottom: 4px solid @sx-blue;
 
   #title {
-    text-shadow: #000 0px 0px 5px;
+    text-shadow: #000 0px 0px 8px;
+    font-size: 40px;
+    margin-bottom: 10px;
   }
 }
 
 #edit-config {
+  background-color: #efefef;
   padding-top: 15px;
   padding-left: 120px;
   padding-right: 120px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid @sx-blue;
+
+  .parsing-indicator {
+    display: inline-block;
+  }
 
   button {
     width: 190px;
   }
 
-  .dir-name {
+  .dir-name, .parsing-indicator {
     margin-left: 45px;
   }
 
+  .dir-name {
+    width: 300px;
+    display: inline-block;
+  }
+
   #edit-config-update {
+    margin-top: 10px;
     text-align: center;
   }
+}
+
+.progress-bar {
+  padding: 5px;
+  height: 15px;
+  width: 200px;
+  border-radius: 5px;
+
+  span {
+    background-color: @sx-green;
+    display: inline-block;
+    height: 100%;
+    border-radius: 3px;
+    transition: width .4s ease-in-out;    
+    width: 0%;
+  }
+
 }

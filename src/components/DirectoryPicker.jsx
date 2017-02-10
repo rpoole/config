@@ -15,7 +15,7 @@ export default class DirectoryPicker extends React.Component {
   }
 
   render() {
-    return <Button color="danger" onClick={this.onClick.bind(this)}>
+    return <Button color="default" variant="raised" onClick={this.onClick.bind(this)}>
         {this.props.text}
       </Button>
   }
