@@ -23,6 +23,6 @@
     "electron": "^1.4.3"
   },
   "scripts": {
-    "compile-css": "./node_modules/.bin/less-watch-compiler src/less/ src/css/"
+    "compile-css": "less-watch-compiler src/less/ src/css/"
   }
 }
