@@ -17,7 +17,9 @@ export default class EditConfig extends React.Component {
       if (parseFloat(el.style.width) === 100) {
         el.innerHTML = 'Parsed!';
       }
+
     });
+    this.props.parseDirectory();
   }
 
   render() {
