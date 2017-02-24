@@ -8,13 +8,14 @@ import createSagaMiddleware from 'redux-saga';
 import reducer from './reducer';
 import {ConfigAppContainer} from './components/ConfigApp';
 import rootSaga from './sagas/sagas';
+import {Directory} from './records';
 
 const initialState = Map({
-  directoryPaths: {
-    prod: null,
-    test: null,
-    dev: null,
-  },
+  directories: Map({
+    prod: new Directory({type: 'prod'}),
+    test: new Directory({type: 'test'}),
+    dev: new Directory({type: 'dev'}),
+  }),
   configOpen: true,
 });
 

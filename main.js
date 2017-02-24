@@ -1,6 +1,6 @@
 import { app, BrowserWindow } from 'electron';
 
-import registerEvents from './src/ipc/main';
+import registerEvents from './src/js/ipc/main';
 
 let mainWindow = null;
 

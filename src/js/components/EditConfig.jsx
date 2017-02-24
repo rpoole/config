@@ -25,7 +25,7 @@ export default class EditConfig extends React.Component {
   render() {
     if (this.props.configOpen) {
       return <div id="edit-config">
-        {Object.keys(this.props.directoryPaths).map( dir => 
+        {Object.keys(this.props.directories.toJS()).map( dir => 
           <div key={dir}>
             <DirectoryPicker 
               dirType={dir}
@@ -33,7 +33,7 @@ export default class EditConfig extends React.Component {
               fileSelected={this.props.setDirectories}
             >
             </DirectoryPicker>
-            <span className="dir-name">{this.props.directoryPaths[dir] || "No file selected."}</span>
+            <span className="dir-name">{this.props.directories.toJS()[dir].path || "No file selected."}</span>
             <div className="parsing-indicator progress-bar">
               <span></span>
             </div>

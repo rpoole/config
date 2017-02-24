@@ -21,7 +21,7 @@ export class ConfigApp extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    directoryPaths: state.get('directoryPaths'),
+    directories: state.get('directories'),
     configOpen: state.get('configOpen'),
   };
 }

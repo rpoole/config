@@ -1,18 +1,21 @@
 import {Map} from 'immutable';
 
 function setDirectories(state, dirType, dirName) {
-  const oldPaths = state.get('directoryPaths');
-  let obj = {};
-  obj[dirType] = dirName;
-  return state.set('directoryPaths', {...oldPaths, ...obj});
+  const oldDir = state.getIn(['directories', dirType]);
+  return state.setIn(['directories', dirType], oldDir.set('path', dirName));
 }
 
 function toggleConfig(state) {
   return state.update('configOpen', configOpen => !configOpen);
 }
 
-function directoryParsed(state, dirs) {
-  return state;
+function directoryParsed(state, dirs, dirType) {
+  const oldDir = state.getIn(['directories', dirType]);
+
+  let now = new Date().toISOString();
+  return state.setIn(['directories', dirType], oldDir.withMutations(dir => {
+    dir.set('lastUpdate', now).set('data', dirs);
+  }));
 }
 
 function directoryParsedErrs(state, errs) {
@@ -29,7 +32,7 @@ export default function(state = Map(), action) {
     case 'TOGGLE_CONFIG':
       return toggleConfig(state);
     case 'DIRECTORY_PARSED':
-      return directoryParsed(state, action.dirs);
+      return directoryParsed(state, action.dirs, action.dirType);
     case 'DIRECTORY_PARSED_ERRS':
       return directoryParsedErrs(state, action.errors);
   }

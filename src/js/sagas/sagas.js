@@ -1,15 +1,25 @@
 import { delay } from 'redux-saga'
-import { put, takeEvery } from 'redux-saga/effects'
+import { put, takeEvery, select } from 'redux-saga/effects'
+import { getDirectories } from './selectors'
 
 import ipc from '../ipc/renderer'
 
 export function* parseDirectory() {
-  try {
-    let root = '/Users/rpoole/code/dev_config';
-    const parsedFiles = yield ipc.parseDirectory(root);
-    yield put({ type: 'DIRECTORY_PARSED', dirs: mapFiles(parsedFiles, root)});
-  } catch(errs) {
-    yield put({ type: 'DIRECTORY_PARSED_ERRS', errors: errs});
+  const directories = (yield select(getDirectories)).toJS();
+
+  for (let type in directories) {
+    let path = directories[type].path;
+    if (!path) {
+      continue;
+    }
+
+    try {
+      const parsedFiles = yield ipc.parseDirectory(path);
+      yield put({ type: 'DIRECTORY_PARSED', dirs: mapFiles(parsedFiles, path), dirType: type});
+    }
+    catch(errs) {
+      yield put({ type: 'DIRECTORY_PARSED_ERRS', errors: errs});
+    }
   }
 }
 
