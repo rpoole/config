@@ -5,16 +5,35 @@ import * as actionCreators from '../action_creators';
 
 import TitleBar from './TitleBar';
 import EditConfig from './EditConfig';
+import AddSelectProperty from './AddSelectProperty';
+import RemoveSelectProperty from './RemoveSelectProperty';
+import AddPropertyListChangedFiles from './AddPropertyListChangedFiles';
+import AddPropertyAddToFiles from './AddPropertyAddToFiles'
 
 export class ConfigApp extends React.Component {
-  constructor(props) {
-    super(props);
+  vd() {
+    return this.props.views.toJS();
+  }
+
+  addProps() {
+    return {
+      propertyData: this.props.propertyData,
+      views: this.props.views,
+      setView: this.props.setView,
+      setPropMethod: this.props.setPropMethod,
+    }
   }
 
   render() {
     return <div>
-      <TitleBar toggleConfig={this.props.toggleConfig}/>
-      <EditConfig {...this.props}/>
+      <TitleBar setView={this.props.setView} />
+      <div className="main">
+        { this.vd().editConfig ? <EditConfig {...this.props}/> : '' }
+        { this.vd().addSelectProperty ? <AddSelectProperty {...this.props}/> : '' }
+        { this.vd().removeSelectProperty ? <RemoveSelectProperty {...this.props}/> : '' }
+        { this.vd().addPropertyListChangedFiles ?  <AddPropertyListChangedFiles {...this.addProps() } /> : '' }
+        { this.vd().addPropertyAddToFiles ?  <AddPropertyAddToFiles {...this.addProps() }/> : '' }
+      </div>
     </div>
   }
 }
@@ -22,7 +41,8 @@ export class ConfigApp extends React.Component {
 function mapStateToProps(state) {
   return {
     directories: state.get('directories'),
-    configOpen: state.get('configOpen'),
+    views: state.get('views'),
+    propertyData: state.get('propertyData'),
   };
 }
 

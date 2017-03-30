@@ -23,9 +23,8 @@ export default class EditConfig extends React.Component {
   }
 
   render() {
-    if (this.props.configOpen) {
-      return <div id="edit-config">
-        {Object.keys(this.props.directories.toJS()).map( dir => 
+    return <div id="edit-config">
+      {Object.keys(this.props.directories.toJS()).map( dir => 
           <div key={dir}>
             <DirectoryPicker 
               dirType={dir}
@@ -38,13 +37,10 @@ export default class EditConfig extends React.Component {
               <span></span>
             </div>
           </div>
-        )}
-        <div id="edit-config-update">
-          <Button variant="raised" color="primary" onClick={this.onClick.bind(this)}>Update</Button>
-        </div>
-      </div>;
-    } else {
-      return null;
-    }
+          )}
+          <div id="edit-config-update">
+            <Button variant="raised" color="primary" onClick={::this.onClick}>Update</Button>
+          </div>
+        </div>;
   }
 }

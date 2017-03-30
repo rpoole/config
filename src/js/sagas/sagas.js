@@ -47,7 +47,7 @@ function mapFiles(dirs, root) {
       }
 
       mappedVals[proj].filetypes.add(file);
-      mappedVals[proj].environments.add(env);
+      mappedVals[proj].environments.add(env.split('-')[0]);
     }
   }
   return mappedVals;
