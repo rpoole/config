@@ -1,8 +1,18 @@
 import { delay } from 'redux-saga'
 import { put, takeEvery, select } from 'redux-saga/effects'
-import { getDirectories } from './selectors'
+import { getDirectories, getAddPropertyData, getPropertyData } from './selectors'
 
 import ipc from '../ipc/renderer'
+
+export function* executeFileModification(action) {
+  try {
+    yield ipc.addProperty(action.modificationToExecute.path, action.propertyName, action.modificationToExecute.value);
+    yield put({type: 'FILE_MODIFICATION_DONE', path: action.modificationToExecute.path});
+  }
+  catch(err) {
+    yield put({type: 'FILE_MODIFICATION_ERR', err: err});
+  }
+}
 
 export function* parseDirectory() {
   const directories = (yield select(getDirectories)).toJS();
@@ -57,8 +67,13 @@ export function* watchParseDirectory() {
   yield takeEvery('PARSE_DIRECTORY', parseDirectory);
 }
 
+export function* watchExecuteFileModifications() {
+  yield takeEvery('EXECUTE_FILE_MODIFICATION', executeFileModification);
+}
+
 export default function* rootSaga() {
   yield [
     watchParseDirectory(),
+    watchExecuteFileModifications(),
   ]
 }

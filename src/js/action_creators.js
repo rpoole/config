@@ -53,3 +53,24 @@ export function setPropMethod(method) {
     method
   }
 }
+
+export function setFileModifications(modifications) {
+  return {
+    type: 'SET_FILE_MODIFICATIONS',
+    modifications
+  }
+}
+
+export function executeFileModification(modificationToExecute, propertyName) {
+  return {
+    type: 'EXECUTE_FILE_MODIFICATION',
+    modificationToExecute,
+    propertyName
+  }
+}
+
+export function resetWizard() {
+  return {
+    type: 'RESET_WIZARD',
+  }
+}

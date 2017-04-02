@@ -16,7 +16,7 @@ function directoryParsed(state, dirs, dirType) {
 
 function directoryParsedErrs(state, errs) {
   for (let err of errs) {
-    console.log(err);
+    console.error(err);
   }
   return state;
 }
@@ -24,7 +24,7 @@ function directoryParsedErrs(state, errs) {
 function setView(state, view) {
   const oldViews = state.get('views');
   return state.set('views', oldViews.map( (v, k) => {
-    return view === k ? !v : false;
+    return view === k;
   }));
 }
 
@@ -64,7 +64,10 @@ function matchFiles(state, propertyName, environments, project, filename) {
     matchedEnvs.forEach( env => {
       let filestart = `${dir.get('path')}/${env}-configs/${project}/${env}`;
       matchedFiles.forEach( file => {
-        selectedFiles.push(filestart + file);
+        selectedFiles.push({
+          path: filestart + file,
+          env: env,
+        });
       });
     });
   });
@@ -76,6 +79,39 @@ function matchFiles(state, propertyName, environments, project, filename) {
     filename: filename,
     selectedFiles: selectedFiles,
   }));
+}
+
+function setFileModifications(state, modifications) {
+  const oldAddData = state.get('addPropertyData');
+  return state.set('addPropertyData', oldAddData.merge({
+    fileModifications: modifications,
+    finishedFileModifications: [],
+  }));
+}
+
+function fileModificationDone(state, path) {
+  let finishedMod = null;
+  const newMods = state.getIn(['addPropertyData', 'fileModifications']).filter( m => {
+    if (m.get('path') === path) {
+      finishedMod = m;
+    }
+
+    return m.get('path') !== path;
+  });
+
+  const newFinishedMods = state.getIn(['addPropertyData', 'finishedFileModifications']).push(finishedMod);
+
+  return state.setIn(['addPropertyData', 'fileModifications'], newMods)
+    .setIn(['addPropertyData', 'finishedFileModifications'], newFinishedMods);
+}
+
+function fileModificationErr(state, err) {
+  console.error(err);
+  return state;
+}
+
+function resetWizard(state) {
+  return state.set('propertyData', Map()).set('addPropertyData', Map());
 }
 
 export default function(state = Map(), action) {
@@ -92,6 +128,14 @@ export default function(state = Map(), action) {
       return setView(state, action.view);
     case 'SET_PROP_METHOD':
       return setPropMethod(state, action.method);
+    case 'SET_FILE_MODIFICATIONS':
+      return setFileModifications(state, action.modifications);
+    case 'FILE_MODIFICATION_DONE':
+      return fileModificationDone(state, action.path);
+    case 'FILE_MODIFICATION_ERR':
+      return fileModificationErr(state, action.err);
+    case 'RESET_WIZARD':
+      return resetWizard(state);
   }
   return state;
 }

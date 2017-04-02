@@ -2,12 +2,13 @@ import React from 'react';
 
 import Button from 'muicss/lib/react/button';
 import Radio from 'muicss/lib/react/radio';
+import CancelButton from './WizardCancelButton';
 
 export default class AddPropertyListChangedFiles extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      method: this.apd().method,
+      method: this.pd().method || 'applyToAllFiles',
     };
   }
   onBackClick(e) {
@@ -18,6 +19,7 @@ export default class AddPropertyListChangedFiles extends React.Component {
   onNextClick(e) {
     e.preventDefault();
     this.props.setPropMethod(this.state.method);
+    this.props.setFileModifications([]);
     this.props.setView('addPropertyAddToFiles');
   }
 
@@ -25,26 +27,27 @@ export default class AddPropertyListChangedFiles extends React.Component {
     this.setState({method: e.target.value});
   }
 
-  apd() {
+  pd() {
     return this.props.propertyData.toJS();
   }
 
   propsStr() {
-    return `${this.apd().environments}-configs/${this.apd().project}/${this.apd().filename}`;
+    return `${this.pd().environments}-configs/${this.pd().project}/${this.pd().filename}`;
   }
 
   render() {
     return <div>
+      <h3> Changed Files </h3>
       <div>
         <h4>Your search string:</h4> <code> {this.propsStr()} </code>
       </div>
       <div>
-        <h4>Property to be added:</h4> <code>{ this.apd().propertyName }</code>
+        <h4>Property to be added:</h4> <code>{ this.pd().propertyName }</code>
       </div>
       <div>
         <h4>Files to be changed:</h4>
-        {this.apd().selectedFiles.map( f => 
-            <div key={f}><code>{f}</code></div>
+        {this.pd().selectedFiles.map( f => 
+            <div key={f.path}><code>{f.path}</code></div>
         )}
       </div>
       <div>
@@ -58,6 +61,7 @@ export default class AddPropertyListChangedFiles extends React.Component {
 
       <Button variant="raised" onClick={::this.onNextClick}>Next</Button>
       <Button variant="raised" onClick={::this.onBackClick}>Back</Button>
+      <CancelButton setView={this.props.setView} targetView={'addSelectProperty'} resetWizard={this.props.resetWizard} />
     </div>;
   }
 }

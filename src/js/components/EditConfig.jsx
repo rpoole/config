@@ -24,6 +24,7 @@ export default class EditConfig extends React.Component {
 
   render() {
     return <div id="edit-config">
+      <h3 style={{textAlign: 'center'}}> Edit settings </h3>
       {Object.keys(this.props.directories.toJS()).map( dir => 
           <div key={dir}>
             <DirectoryPicker 

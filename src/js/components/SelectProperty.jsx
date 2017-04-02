@@ -10,12 +10,12 @@ export default class SelectProperty extends React.Component {
   constructor(props) {
     super(props);
 
-    const apd = props.propertyData.toJSON();
+    const pd = props.propertyData.toJSON();
     this.state = {
-      propertyName: apd.propertyName,
-      environments: apd.environments,
-      project: apd.project,
-      filename: apd.filename,
+      propertyName: pd.propertyName || '',
+      environments: pd.environments || '',
+      project: pd.project || '',
+      filename: pd.filename || '',
     };
   }
 
@@ -43,7 +43,6 @@ export default class SelectProperty extends React.Component {
   render() {
     return <div>
       <Form>
-        <legend>{this.props.legend}</legend>
         <Input label="Property Name" value={this.state.propertyName} floatingLabel={true} required={true} onChange={bindInput(this, 'propertyName')}/>
         <Input label="Environments Regex" value={this.state.environments} floatingLabel={true} required={true} onChange={bindInput(this, 'environments')}/>
         <Input label="Project" value={this.state.project} floatingLabel={true} required={true} onChange={bindInput(this, 'project')}/>
