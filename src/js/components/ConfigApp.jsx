@@ -26,16 +26,41 @@ export class ConfigApp extends React.Component {
     }
   }
 
+  selectedClass(view) {
+    let klass = '';
+
+    const views = this.vd();
+    Object.keys(views).forEach(k => {
+      if (k === view && views[k]) {
+        klass = 'selected';
+      }
+    });
+
+    return klass;
+  }
+
   render() {
     return <div>
-      <TitleBar setView={this.props.setView} />
-      <div className="main">
-        { this.vd().editConfig ? <EditConfig {...this.props}/> : '' }
-        { this.vd().addSelectProperty ? <AddSelectProperty {...this.props}/> : '' }
-        { this.vd().removeSelectProperty ? <RemoveSelectProperty {...this.props}/> : '' }
-        { this.vd().addPropertyListChangedFiles ?  <AddPropertyListChangedFiles {...this.baseProps() } setFileModifications={this.props.setFileModifications} /> : '' }
-        { this.vd().addPropertyAddToFiles ?  <AddPropertyAddToFiles {...this.baseProps() } setFileModifications={this.props.setFileModifications} addPropertyData={this.props.addPropertyData}/> : '' }
-        { this.vd().addPropertyExecuteModifications ?  <AddPropertyExecuteModifications {...this.baseProps() } addPropertyData={this.props.addPropertyData} executeFileModification={this.props.executeFileModification} setFileModifications={this.props.setFileModifications} /> : '' }
+      <div id="app">
+        <div className="header">
+          <TitleBar views={this.props.views} setView={this.props.setView} />
+        </div>
+        <div className="sidebar">
+          <div className="breadcrumbs">
+            <div className={ this.selectedClass('addSelectProperty') }>Property Info</div>
+            <div className={ this.selectedClass('addPropertyListChangedFiles') }>Changed Files</div>
+            <div className={ this.selectedClass('addPropertyAddToFiles') }>Enter Values</div>
+            <div className={ this.selectedClass('addPropertyExecuteModifications') }>Execute</div>
+          </div>
+        </div>
+        <div className="main">
+          { this.vd().editConfig ? <EditConfig {...this.props}/> : '' }
+          { this.vd().addSelectProperty ? <AddSelectProperty {...this.props}/> : '' }
+          { this.vd().removeSelectProperty ? <RemoveSelectProperty {...this.props}/> : '' }
+          { this.vd().addPropertyListChangedFiles ?  <AddPropertyListChangedFiles {...this.baseProps() } setFileModifications={this.props.setFileModifications} /> : '' }
+          { this.vd().addPropertyAddToFiles ?  <AddPropertyAddToFiles {...this.baseProps() } setFileModifications={this.props.setFileModifications} addPropertyData={this.props.addPropertyData}/> : '' }
+          { this.vd().addPropertyExecuteModifications ?  <AddPropertyExecuteModifications {...this.baseProps() } addPropertyData={this.props.addPropertyData} executeFileModification={this.props.executeFileModification} setFileModifications={this.props.setFileModifications} /> : '' }
+        </div>
       </div>
     </div>
   }

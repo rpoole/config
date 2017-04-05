@@ -132,15 +132,18 @@ export default class AddPropertyAddToFiles extends React.Component {
 
   render() {
     return <div>
-      <h3>Enter Property Values</h3>
-      <div>
+      <h3 className="wizard-title">Enter Property Values</h3>
+      <div className="wizard-info-panel">
         <h4 style={{display: 'inline-block'}}>Property: </h4> <code> {this.pd().propertyName} </code>
       </div>
-      <Form>
+      <Form className="wizard-info-panel">
         {this.renderPropertyFields()}
-      <Button variant="raised" color="primary" onClick={::this.onNextClick}>Execute</Button>
-      <Button variant="raised" onClick={::this.onBackClick}>Back</Button>
-      <CancelButton setView={this.props.setView} targetView={'addSelectProperty'} resetWizard={this.props.resetWizard} />
+
+        <div className="wizard-button-nav">
+          <Button variant="raised" onClick={::this.onNextClick}>Execute</Button>
+          <Button variant="raised" onClick={::this.onBackClick}>Back</Button>
+          <CancelButton setView={this.props.setView} targetView={'addSelectProperty'} resetWizard={this.props.resetWizard} />
+        </div>
       </Form>
     </div>
   }

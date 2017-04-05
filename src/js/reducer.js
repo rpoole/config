@@ -9,6 +9,7 @@ function directoryParsed(state, dirs, dirType) {
   const oldDir = state.getIn(['directories', dirType]);
 
   let now = new Date().toISOString();
+  console.log(dirs);
   return state.setIn(['directories', dirType], oldDir.withMutations(dir => {
     dir.set('lastUpdate', now).set('data', dirs);
   }));

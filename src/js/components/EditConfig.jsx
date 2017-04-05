@@ -24,7 +24,6 @@ export default class EditConfig extends React.Component {
 
   render() {
     return <div id="edit-config">
-      <h3 style={{textAlign: 'center'}}> Edit settings </h3>
       {Object.keys(this.props.directories.toJS()).map( dir => 
           <div key={dir}>
             <DirectoryPicker 
@@ -40,7 +39,7 @@ export default class EditConfig extends React.Component {
           </div>
           )}
           <div id="edit-config-update">
-            <Button variant="raised" color="primary" onClick={::this.onClick}>Update</Button>
+            <Button variant="raised" onClick={::this.onClick}>Update</Button>
           </div>
         </div>;
   }

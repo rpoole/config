@@ -32,8 +32,8 @@ export default class AddPropertyExecuteModifications extends React.Component {
 
   render() {
     return <div>
-      <h3>Executing modifications</h3>
-      <div className="executing-panel">
+      <h3 className="wizard-title">Executing modifications</h3>
+      <div className="wizard-info-panel executing-panel">
         <div>
           <h4>Queued:</h4>
         </div>
@@ -44,7 +44,7 @@ export default class AddPropertyExecuteModifications extends React.Component {
             </div>
             )}
       </div>
-      <div className="executing-panel">
+      <div className="wizard-info-panel executing-panel">
         <div>
           <h4>Finished:</h4>
         </div>
@@ -55,8 +55,10 @@ export default class AddPropertyExecuteModifications extends React.Component {
             </div>
             )}
       </div>
-      <Button variant="raised" onClick={::this.onDoneClick} disabled={this.apd().fileModifications.length !== 0}>Done</Button>
-      <Button variant="raised" onClick={::this.onBackClick} disabled={this.apd().fileModifications.length !== 0}>Back</Button>
+      <div className="wizard-button-nav">
+        <Button variant="raised" onClick={::this.onDoneClick} disabled={this.apd().fileModifications.length !== 0}>Done</Button>
+        <Button variant="raised" onClick={::this.onBackClick} disabled={this.apd().fileModifications.length !== 0}>Back</Button>
+      </div>
     </div>;
   }
 }

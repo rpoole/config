@@ -9,13 +9,73 @@
 // Styles
 body {
   font-family: 'Nunito', sans-serif;
-  background-color: #efefef;
+  background-color: #f7f7f7;
+}
+
+html, body {
+  height: 100%;
+}
+
+#app {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.header {
+  flex-basis: 100%;
+  border-bottom: 1px solid #ddd;
+}
+
+.main, .sidebar {
+  min-height: 600px;
 }
 
 .main {
-  padding-left: 120px;
-  padding-right: 120px;
-  padding-bottom: 15px;
+  flex: 5;
+  order: 3;
+  padding-right: 50px;
+  overflow-y: auto;
+  background-color: white;
+  padding-left: 25px;
+}
+
+.sidebar {
+  flex: 1;
+  order: 1;
+  border-right: 1px solid #ddd;
+
+  &.sidebar-right {
+    order: 3;
+  }
+}
+
+.breadcrumbs {
+  position: relative;
+  top: 20%;
+  transform: translateY(-20%);
+
+  padding-right: 30px;
+
+  > div {
+    color: white;
+    opacity: 0.8;
+    background-color: darken(#ddd, 40%);
+    padding: 8px;
+    width: 65%;
+    transition: width .25s ease, color .25s ease, opacity .25s ease;
+    border-radius: 0px 2px 2px 0px;
+
+    &.selected {
+      background-color: darken(#ddd, 10%);
+      opacity: 1;
+      width: 90%;
+
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  }
 }
 
 #title-bar {
@@ -24,14 +84,75 @@ body {
   color: white;
   font-weight: bold;
   padding-top: 5px;
-  padding-bottom: 10px;
   text-align: center;
-  border-bottom: 4px solid @sx-blue;
+
+  .title-buttons {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    > button {
+      margin-right: 20px;
+    }
+
+    background-color: darken(@sx-blue, 10%);
+  }
 
   #title {
-    text-shadow: #000 0px 0px 8px;
-    font-size: 40px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    font-family: 'Ubuntu Mono', monospace;
+    font-weight: 900;
+  }
+}
+
+.title-button {
+  padding: 0px;
+  border-radius: 2px;
+  border: none;
+  height: 50px;
+  box-shadow: 0px 4px 2px -2px rgba(0,0,0,.15);
+  cursor: pointer;
+
+  .title-button--icon {
+    border-radius: 2px 0px 0px 2px;
+    float: left;
+    line-height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: darken(@sx-blue, 5%);
+    i {
+      color: white;
+    }
+  }
+
+  .title-button--text {
+    border-radius: 0px 2px 2px 0px;
+    background-color: @sx-blue;
+    color: white;
+    padding-right: 15px;
+    padding-left: 10px;
+    float: right;
+    line-height: 50px;
+    text-align: center;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &.selected {
+  }
+
+  &:hover, &.selected {
+    .title-button--icon {
+      background-color: lighten(@sx-blue, 5%);
+    }
+
+    .title-button--text {
+      background-color: lighten(@sx-blue, 10%);
+    }
+  }
+
+  &:active {
+    border-style: none;
   }
 }
 
@@ -78,4 +199,18 @@ body {
 
 .executing-panel {
   height: 125px;
+}
+
+.wizard-info-panel:not(:nth-child(2)) {
+  margin-top: 20px;
+}
+
+.wizard-title {
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.wizard-button-nav {
+  margin-top: 20px;
 }

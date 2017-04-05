@@ -41,13 +41,15 @@ export default class SelectProperty extends React.Component {
   }
 
   render() {
-    return <div>
+    return <div className="wizard-info-panel">
       <Form>
         <Input label="Property Name" value={this.state.propertyName} floatingLabel={true} required={true} onChange={bindInput(this, 'propertyName')}/>
         <Input label="Environments Regex" value={this.state.environments} floatingLabel={true} required={true} onChange={bindInput(this, 'environments')}/>
         <Input label="Project" value={this.state.project} floatingLabel={true} required={true} onChange={bindInput(this, 'project')}/>
         <Input label="Filename Regex" value={this.state.filename} floatingLabel={true} required={true} onChange={bindInput(this, 'filename')}/>
-        <Button variant="raised" onClick={::this.onNextClick}>Next</Button>
+        <div className="wizard-button-nav">
+          <Button variant="raised" onClick={::this.onNextClick}>Next</Button>
+        </div>
       </Form>
     </div>;
   }
