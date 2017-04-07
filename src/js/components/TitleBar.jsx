@@ -18,17 +18,12 @@ export default class TitleBar extends React.Component {
     this.props.setView('removeSelectProperty');
   }
 
-  selectedClass(view) {
-    let klass = '';
+  selectedClass(viewStart) {
+    if (this.props.currentView.startsWith(viewStart)) {
+      return 'selected';
+    }
 
-    const views = this.props.views.toJS();
-    Object.keys(views).forEach(k => {
-      if (k.startsWith(view) && views[k]) {
-        klass = 'selected';
-      }
-    });
-
-    return klass;
+    return '';
   }
 
   render() {

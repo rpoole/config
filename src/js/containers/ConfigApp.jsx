@@ -3,16 +3,16 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../action_creators';
 
-import TitleBar from './TitleBar';
-import EditConfigContainer from '../containers/EditConfig';
-import AddSelectPropertyContainer from '../containers/AddSelectProperty';
-import RemoveSelectPropertyContainer from '../containers/RemoveSelectProperty';
-import AddPropertyListChangedFilesContainer from '../containers/AddPropertyListChangedFiles';
-import AddPropertyAddToFilesContainer from '../containers/AddPropertyAddToFiles'
-import AddPropertyExecuteModificationsContainer from '../containers/AddPropertyExecuteModifications'
-import SideNavContainer from '../containers/SideNav';
+import TitleBarContainer from './TitleBar';
+import EditConfigContainer from './EditConfig';
+import AddSelectPropertyContainer from './AddSelectProperty';
+import RemoveSelectPropertyContainer from './RemoveSelectProperty';
+import AddPropertyListChangedFilesContainer from './AddPropertyListChangedFiles';
+import AddPropertyAddToFilesContainer from './AddPropertyAddToFiles'
+import AddPropertyExecuteModificationsContainer from './AddPropertyExecuteModifications'
+import SideNavContainer from './SideNav';
 
-import {currentView} from '../containers/selectors';
+import {currentView} from './selectors';
 
 export class ConfigApp extends React.Component {
 
@@ -33,7 +33,7 @@ export class ConfigApp extends React.Component {
     return <div>
       <div id="app">
         <div className="header">
-          <TitleBar views={this.props.views} setView={this.props.setView} />
+          <TitleBarContainer />
         </div>
         <div className="sidebar">
           <SideNavContainer />
