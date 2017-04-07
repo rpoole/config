@@ -114,7 +114,7 @@ html, body {
   .title-buttons {
     flex: 4;
     order: 2;
-    background-color: darken(@sx-blue, 10%);
+    background-color: @sx-grey;
     border-left: 1px solid #ddd;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -145,7 +145,7 @@ html, body {
     line-height: 50px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: darken(@sx-blue, 5%);
+    background-color: lighten(@sx-grey, 5%);
     i {
       color: white;
     }
@@ -153,7 +153,7 @@ html, body {
 
   .title-button--text {
     border-radius: 0px 2px 2px 0px;
-    background-color: @sx-blue;
+    background-color: lighten(@sx-grey, 10);
     color: white;
     padding-right: 15px;
     padding-left: 10px;
@@ -171,11 +171,11 @@ html, body {
 
   &:hover, &.selected {
     .title-button--icon {
-      background-color: lighten(@sx-blue, 2.5%);
+      background-color: lighten(@sx-grey, 10%);
     }
 
     .title-button--text {
-      background-color: lighten(@sx-blue, 5%);
+      background-color: lighten(@sx-grey, 15%);
     }
   }
 
