@@ -19,7 +19,8 @@ export default class EditConfig extends React.Component {
       }
 
     });
-    this.props.parseDirectory();
+
+    this.props.onUpdateClick();
   }
 
   render() {
@@ -29,7 +30,7 @@ export default class EditConfig extends React.Component {
             <DirectoryPicker 
               dirType={dir}
               text={`Select ${dir.toUpperCase()} path`}
-              fileSelected={this.props.setDirectories}
+              fileSelected={this.props.onFileSelected}
             >
             </DirectoryPicker>
             <span className="dir-name">{this.props.directories.toJS()[dir].path || "No file selected."}</span>
@@ -39,7 +40,7 @@ export default class EditConfig extends React.Component {
           </div>
           )}
           <div id="edit-config-update">
-            <Button variant="raised" onClick={::this.onClick}>Update</Button>
+            <Button className="success" variant="raised" onClick={::this.onClick}>Update</Button>
           </div>
         </div>;
   }

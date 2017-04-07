@@ -11,7 +11,7 @@ export default class CancelButton extends React.Component {
   }
 
   render() {
-    return <Button variant="raised" onClick={::this.onClick}>
+    return <Button color="danger" variant="raised" onClick={::this.onClick}>
         Cancel
       </Button>
   }

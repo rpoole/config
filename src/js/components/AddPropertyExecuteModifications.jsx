@@ -56,8 +56,8 @@ export default class AddPropertyExecuteModifications extends React.Component {
             )}
       </div>
       <div className="wizard-button-nav">
-        <Button variant="raised" onClick={::this.onDoneClick} disabled={this.apd().fileModifications.length !== 0}>Done</Button>
-        <Button variant="raised" onClick={::this.onBackClick} disabled={this.apd().fileModifications.length !== 0}>Back</Button>
+        <Button variant="raised" color="primary" onClick={::this.onDoneClick} disabled={this.apd().fileModifications.length !== 0}>Done</Button>
+        <Button variant="raised" color="primary" onClick={::this.onBackClick} disabled={this.apd().fileModifications.length !== 0}>Back</Button>
       </div>
     </div>;
   }

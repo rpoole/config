@@ -140,8 +140,8 @@ export default class AddPropertyAddToFiles extends React.Component {
         {this.renderPropertyFields()}
 
         <div className="wizard-button-nav">
-          <Button variant="raised" onClick={::this.onNextClick}>Execute</Button>
-          <Button variant="raised" onClick={::this.onBackClick}>Back</Button>
+          <Button variant="raised" className="success" onClick={::this.onNextClick}>Execute</Button>
+          <Button variant="raised" color="primary" onClick={::this.onBackClick}>Back</Button>
           <CancelButton setView={this.props.setView} targetView={'addSelectProperty'} resetWizard={this.props.resetWizard} />
         </div>
       </Form>

@@ -48,7 +48,7 @@ export default class SelectProperty extends React.Component {
         <Input label="Project" value={this.state.project} floatingLabel={true} required={true} onChange={bindInput(this, 'project')}/>
         <Input label="Filename Regex" value={this.state.filename} floatingLabel={true} required={true} onChange={bindInput(this, 'filename')}/>
         <div className="wizard-button-nav">
-          <Button variant="raised" onClick={::this.onNextClick}>Next</Button>
+          <Button variant="raised" color="primary" onClick={::this.onNextClick}>Next</Button>
         </div>
       </Form>
     </div>;

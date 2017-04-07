@@ -8,8 +8,8 @@ function setDirectories(state, dirType, dirName) {
 function directoryParsed(state, dirs, dirType) {
   const oldDir = state.getIn(['directories', dirType]);
 
+  // TODO remove this
   let now = new Date().toISOString();
-  console.log(dirs);
   return state.setIn(['directories', dirType], oldDir.withMutations(dir => {
     dir.set('lastUpdate', now).set('data', dirs);
   }));
@@ -24,6 +24,10 @@ function directoryParsedErrs(state, errs) {
 
 function setView(state, view) {
   const oldViews = state.get('views');
+  const k = oldViews.map( (v, k) => {
+    return view === k;
+  });
+
   return state.set('views', oldViews.map( (v, k) => {
     return view === k;
   }));

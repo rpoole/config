@@ -9,13 +9,14 @@ export default class DirectoryPicker extends React.Component {
     e.preventDefault();
     remote.dialog.showOpenDialog({properties: ['openDirectory']}, (paths) => {
       if (paths && paths.length > 0) {
+        console.log(this);
         this.props.fileSelected(this.props.dirType, paths[0] + '');
       }
     });
   }
 
   render() {
-    return <Button color="default" variant="raised" onClick={::this.onClick}>
+    return <Button color="primary" variant="raised" onClick={::this.onClick}>
         {this.props.text}
       </Button>
   }

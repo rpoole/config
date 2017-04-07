@@ -60,8 +60,8 @@ export default class AddPropertyListChangedFiles extends React.Component {
       </div>
 
       <div className="wizard-button-nav">
-        <Button variant="raised" onClick={::this.onNextClick}>Next</Button>
-        <Button variant="raised" onClick={::this.onBackClick}>Back</Button>
+        <Button variant="raised" color="primary" onClick={::this.onNextClick}>Next</Button>
+        <Button variant="raised" color="primary" onClick={::this.onBackClick}>Back</Button>
         <CancelButton setView={this.props.setView} targetView={'addSelectProperty'} resetWizard={this.props.resetWizard} />
       </div>
     </div>;
