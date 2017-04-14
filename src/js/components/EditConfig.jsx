@@ -19,7 +19,6 @@ export default class EditConfig extends React.Component {
       }
 
     });
-
     this.props.onUpdateClick();
   }
 
@@ -30,7 +29,7 @@ export default class EditConfig extends React.Component {
             <DirectoryPicker 
               dirType={dir}
               text={`Select ${dir.toUpperCase()} path`}
-              fileSelected={this.props.onFileSelected}
+              fileSelected={this.props.setDirectories}
             >
             </DirectoryPicker>
             <span className="dir-name">{this.props.directories.toJS()[dir].path || "No file selected."}</span>

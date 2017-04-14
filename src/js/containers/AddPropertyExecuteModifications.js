@@ -4,8 +4,9 @@ import AddPropertyExecuteModifications from '../components/AddPropertyExecuteMod
 
 const mapStateToProps = (state) => {
   return {
-    propertyData: state.get('propertyData'),
-    addPropertyData: state.get('addPropertyData'),
+    propertyName: state.getIn(['propertyData', 'propertyName']),
+    fileModifications: state.getIn(['addPropertyData', 'fileModifications']),
+    finishedFileModifications: state.getIn(['addPropertyData', 'finishedFileModifications']),
   };
 };
 

@@ -10,12 +10,11 @@ export default class SelectProperty extends React.Component {
   constructor(props) {
     super(props);
 
-    const pd = props.propertyData.toJSON();
     this.state = {
-      propertyName: pd.propertyName || '',
-      environments: pd.environments || '',
-      project: pd.project || '',
-      filename: pd.filename || '',
+      propertyName: this.props.propertyName || '',
+      environments: this.props.environments || '',
+      project: this.props.project || '',
+      filename: this.props.filename || '',
     };
   }
 

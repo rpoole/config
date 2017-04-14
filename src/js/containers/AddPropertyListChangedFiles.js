@@ -4,7 +4,12 @@ import AddPropertyListChangedFiles from '../components/AddPropertyListChangedFil
 
 const mapStateToProps = (state) => {
   return {
-    propertyData: state.get('propertyData'),
+    method: state.getIn(['propertyData', 'method']),
+    environments: state.getIn(['propertyData', 'environments']),
+    project: state.getIn(['propertyData', 'project']),
+    filename: state.getIn(['propertyData', 'filename']),
+    propertyName: state.getIn(['propertyData', 'propertyName']),
+    selectedFiles: state.getIn(['propertyData', 'selectedFiles']),
   };
 };
 

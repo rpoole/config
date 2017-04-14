@@ -4,7 +4,10 @@ import AddPropertyAddToFiles from '../components/AddPropertyAddToFiles'
 
 const mapStateToProps = (state) => {
   return {
-    propertyData: state.get('propertyData'),
+    selectedFiles: state.getIn(['propertyData', 'selectedFiles']),
+    method: state.getIn(['propertyData', 'method']),
+    propertyName: state.getIn(['propertyData', 'propertyName']),
+    fileModifications: state.getIn(['addPropertyData', 'fileModifications']),
     addPropertyData: state.get('addPropertyData'),
   };
 };

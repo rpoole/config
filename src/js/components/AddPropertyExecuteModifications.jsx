@@ -5,14 +5,14 @@ import Radio from 'muicss/lib/react/radio';
 
 export default class AddPropertyExecuteModifications extends React.Component {
   componentDidMount() {
-    this.apd().fileModifications.forEach( m => {
-      this.props.executeFileModification(m, this.pd().propertyName);
+    this.props.fileModifications.forEach( m => {
+      this.props.executeFileModification(m.toJS(), this.props.propertyName);
     });
   }
 
   onBackClick(e) {
     e.preventDefault();
-    this.props.setFileModifications(this.props.addPropertyData.get('finishedFileModifications'));
+    this.props.setFileModifications(this.props.finishedFileModifications);
     this.props.setView('addPropertyAddToFiles');
   }
 
@@ -22,14 +22,6 @@ export default class AddPropertyExecuteModifications extends React.Component {
     this.props.setView('addSelectProperty');
   }
 
-  pd() {
-    return this.props.propertyData.toJS();
-  }
-
-  apd() {
-    return this.props.addPropertyData.toJS();
-  }
-
   render() {
     return <div>
       <h3 className="wizard-title">Executing modifications</h3>
@@ -37,9 +29,9 @@ export default class AddPropertyExecuteModifications extends React.Component {
         <div>
           <h4>Queued:</h4>
         </div>
-        {this.apd().fileModifications.map( fm =>
-            <div key={fm.path}>
-              <code>{fm.path}:{fm.value}</code>
+        {this.props.fileModifications.map( fm =>
+            <div key={fm.get('path')}>
+              <code>{fm.get('path')}:{fm.get('value')}</code>
               <br/>
             </div>
             )}
@@ -48,16 +40,16 @@ export default class AddPropertyExecuteModifications extends React.Component {
         <div>
           <h4>Finished:</h4>
         </div>
-        {this.apd().finishedFileModifications.map( ffm =>
-            <div key={ffm.path}>
-              <code>{ffm.path}:{ffm.value}</code>
+        {this.props.finishedFileModifications.map( ffm =>
+            <div key={ffm.get('path')}>
+              <code>{ffm.get('path')}:{ffm.get('value')}</code>
               <br/>
             </div>
             )}
       </div>
       <div className="wizard-button-nav">
-        <Button variant="raised" color="primary" onClick={::this.onDoneClick} disabled={this.apd().fileModifications.length !== 0}>Done</Button>
-        <Button variant="raised" color="primary" onClick={::this.onBackClick} disabled={this.apd().fileModifications.length !== 0}>Back</Button>
+        <Button variant="raised" color="primary" onClick={::this.onDoneClick} disabled={this.props.fileModifications.size !== 0}>Done</Button>
+        <Button variant="raised" color="primary" onClick={::this.onBackClick} disabled={this.props.fileModifications.size !== 0}>Back</Button>
       </div>
     </div>;
   }

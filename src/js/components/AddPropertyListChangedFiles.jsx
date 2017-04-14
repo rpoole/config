@@ -8,7 +8,7 @@ export default class AddPropertyListChangedFiles extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      method: this.pd().method || 'applyToAllFiles',
+      method: this.props.method || 'applyToAllFiles',
     };
   }
   onBackClick(e) {
@@ -27,12 +27,8 @@ export default class AddPropertyListChangedFiles extends React.Component {
     this.setState({method: e.target.value});
   }
 
-  pd() {
-    return this.props.propertyData.toJS();
-  }
-
   propsStr() {
-    return `${this.pd().environments}-configs/${this.pd().project}/${this.pd().filename}`;
+    return `${this.props.environments}-configs/${this.props.project}/${this.props.filename}`;
   }
 
   render() {
@@ -42,12 +38,12 @@ export default class AddPropertyListChangedFiles extends React.Component {
         <h4>Your search string:</h4> <code> {this.propsStr()} </code>
       </div>
       <div className="wizard-info-panel">
-        <h4>Property to be added:</h4> <code>{ this.pd().propertyName }</code>
+        <h4>Property to be added:</h4> <code>{ this.props.propertyName }</code>
       </div>
       <div className="wizard-info-panel">
         <h4>Files to be changed:</h4>
-        {this.pd().selectedFiles.map( f => 
-            <div key={f.path}><code>{f.path}</code></div>
+        {this.props.selectedFiles.map( f => 
+            <div key={f.get('path')}><code>{f.get('path')}</code></div>
         )}
       </div>
       <div className="wizard-info-panel">

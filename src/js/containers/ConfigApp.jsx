@@ -5,8 +5,8 @@ import * as actionCreators from '../action_creators';
 
 import TitleBarContainer from './TitleBar';
 import EditConfigContainer from './EditConfig';
-import AddSelectPropertyContainer from './AddSelectProperty';
-import RemoveSelectPropertyContainer from './RemoveSelectProperty';
+import AddSelectProperty from '../components/AddSelectProperty';
+import RemoveSelectProperty from '../components/RemoveSelectProperty';
 import AddPropertyListChangedFilesContainer from './AddPropertyListChangedFiles';
 import AddPropertyAddToFilesContainer from './AddPropertyAddToFiles'
 import AddPropertyExecuteModificationsContainer from './AddPropertyExecuteModifications'
@@ -19,8 +19,8 @@ export class ConfigApp extends React.Component {
   renderMainPanel() {
     const viewMap = {
       editConfig: <EditConfigContainer />,
-      addSelectProperty: <AddSelectPropertyContainer />,
-      removeSelectProperty: <RemoveSelectPropertyContainer />,
+      addSelectProperty: <AddSelectProperty />,
+      removeSelectProperty: <RemoveSelectProperty />,
       addPropertyListChangedFiles: <AddPropertyListChangedFilesContainer />,
       addPropertyAddToFiles: <AddPropertyAddToFilesContainer />,
       addPropertyExecuteModifications: <AddPropertyExecuteModificationsContainer />,

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {Map} from 'immutable';
+
 import Button from 'muicss/lib/react/button';
 import Form from 'muicss/lib/react/form';
 import Input from 'muicss/lib/react/input';
@@ -12,15 +14,15 @@ export default class AddPropertyAddToFiles extends React.Component {
     super(props);
     this.state = {};
 
-    const method = this.pd().method;
-    this.pd().selectedFiles.forEach( f => {
-      const val = this._findFileForPath(f.path).value || '';
+    const method = this.props.method;
+    this.props.selectedFiles.forEach( f => {
+      const val = this._findFileForPath(f.get('path')).get('value') || '';
 
       if (method === 'applyToDifferentFiles') {
-        this.state[f.path] = val;
+        this.state[f.get('path')] = val;
       } else if (method === 'applyToAllFilesPerEnv') {
-        if (!this.state.hasOwnProperty(f.env)) {
-          this.state[f.env] = val;
+        if (!this.state.hasOwnProperty(f.get('env'))) {
+          this.state[f.get('env')] = val;
         }
       } else {
         if (!this.state.hasOwnProperty('all')) {
@@ -31,7 +33,7 @@ export default class AddPropertyAddToFiles extends React.Component {
   }
 
   _findFileForPath(path) {
-    return this.apd().fileModifications.filter( fm => fm.path === path)[0] || {};
+    return this.props.fileModifications.filter( fm => fm.get('path') === path).first() || new Map();
   }
 
   onBackClick(e) {
@@ -41,18 +43,19 @@ export default class AddPropertyAddToFiles extends React.Component {
 
   onNextClick(e) {
     e.preventDefault();
-    const method = this.pd().method;
+    // TODO this logic shouldn't be here
+    const method = this.props.method;
     let modifications = [];
 
-    this.pd().selectedFiles.forEach( f => {
+    this.props.selectedFiles.forEach( f => {
       let obj = {
-        path: f.path,
+        path: f.get('path'),
       };
 
       if (method === 'applyToDifferentFiles') {
-        obj.value = this.state[f.path];
+        obj.value = this.state[f.get('path')];
       } else if (method === 'applyToAllFilesPerEnv') {
-        obj.value = this.state[f.env];
+        obj.value = this.state[f.get('env')];
       } else {
         obj.value = this.state['all'];
       }
@@ -64,25 +67,15 @@ export default class AddPropertyAddToFiles extends React.Component {
     this.props.setView('addPropertyExecuteModifications');
   }
 
-  pd() {
-    return this.props.propertyData.toJS();
-  }
-
-  apd() {
-    return this.props.addPropertyData.toJS();
-  }
-
   renderPropertyFields() {
-    const method = this.pd().method;
-
-    switch(method) {
+    switch(this.props.method) {
       case 'applyToAllFiles':
         return <div>
           <h5>All Files</h5>
-          {this.pd().selectedFiles.map( file => 
-              <div key={file.path}>
+          {this.props.selectedFiles.map( file => 
+              <div key={file.get('path')}>
                 <div>
-                  <code>{file.path}</code>
+                  <code>{file.get('path')}</code>
                 </div>
               </div>
               )}
@@ -90,14 +83,14 @@ export default class AddPropertyAddToFiles extends React.Component {
         </div>
       case 'applyToAllFilesPerEnv':
         let envGroups = {};
-        let files = this.pd().selectedFiles;
+        let files = this.props.selectedFiles;
 
         files.forEach( f => {
-          let env = f.env;
+          let env = f.get('env');
           if (!envGroups[env]) {
             envGroups[env] = [];
           }
-          envGroups[env].push(f.path);
+          envGroups[env].push(f.get('path'));
         });
 
         let groups = [];
@@ -118,12 +111,12 @@ export default class AddPropertyAddToFiles extends React.Component {
             </div>
       case 'applyToDifferentFiles':
         return <div>
-          {this.pd().selectedFiles.map( file => 
-              <div key={file.path}>
+          {this.props.selectedFiles.map( file => 
+              <div key={file.get('path')}>
                 <div>
-                  <code>{file.path}</code>
+                  <code>{file.get('path')}</code>
                 </div>
-                <Input value={this.state[file.path]} hint={'Property Value'} value={this.state[file.path]} required={true} onChange={bindInput(this, file.path)}/>
+                <Input value={this.state[file.path]} hint={'Property Value'} value={this.state[file.get('path')]} required={true} onChange={bindInput(this, file.get('path'))}/>
               </div>
               )}
             </div>
@@ -134,7 +127,7 @@ export default class AddPropertyAddToFiles extends React.Component {
     return <div>
       <h3 className="wizard-title">Enter Property Values</h3>
       <div className="wizard-info-panel">
-        <h4 style={{display: 'inline-block'}}>Property: </h4> <code> {this.pd().propertyName} </code>
+        <h4 style={{display: 'inline-block'}}>Property: </h4> <code> {this.props.propertyName} </code>
       </div>
       <Form className="wizard-info-panel">
         {this.renderPropertyFields()}
