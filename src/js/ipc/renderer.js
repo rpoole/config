@@ -1,39 +1,36 @@
 import {ipcRenderer} from 'electron';
 
-function parseDirectory(filePath) {
+function keyedIpcEvent(eventName) {
+  const args = Array.prototype.slice.call(arguments, 1);
+  const key = args.reduce((sum, val) => {
+    return sum = sum + val;
+  }, '');
+
   return new Promise((resolve, reject) => {
-    ipcRenderer.on('directory-parsed', (event, data) => {
+    ipcRenderer.once(`${eventName}-done${key}`, (event, data) => {
       resolve(data);
     })
 
-    ipcRenderer.on('directory-parsed-err', (event, data) => {
+    ipcRenderer.once(`${eventName}-err${key}`, (event, data) => {
       reject(data);
     })
 
-    ipcRenderer.send('parse-directory', filePath);
+    ipcRenderer.send(eventName, key, ...args);
+
   });
+}
+
+function parseDirectory(filePath) {
+  return keyedIpcEvent('parse-directory', ...arguments);
 }
 
 function addProperty(path, property, value) {
-  return new Promise((resolve, reject) => {
-    console.log(`Path: ${path}\nProperty: ${property}\nValue: ${value}`);
-    setTimeout(resolve, Math.random() * 3000 + 1000);
-  });
-}
-
-function editProperties(propertyChanges, projects, environments, callback) {
-
-}
-
-function removeProperties(properties, projects, environments, callback) {
-
+  return keyedIpcEvent('add-property', ...arguments);
 }
 
 var api = {
   parseDirectory: parseDirectory,
   addProperty: addProperty,
-  editProperties: editProperties,
-  removeProperties: removeProperties,
 };
 
 export default api

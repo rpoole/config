@@ -5,6 +5,18 @@ function setDirectories(state, dirType, dirName) {
   return state.setIn(['directories', dirType], oldDir.set('path', dirName));
 }
 
+// TODO lot cleaner with reducers
+function setConfig(state, configProps) {
+  state = setDirectories(state, 'prod', configProps.prod);
+  state = setDirectories(state, 'dev', configProps.dev);
+  state = setDirectories(state, 'test', configProps.test);
+
+  return state
+    .set('gitPassword', configProps.gitPassword)
+    .set('gitPubKeyFile', configProps.gitPubKeyFile)
+    .set('gitPrivateKeyFile', configProps.gitPrivateKeyFile)
+}
+
 function directoryParsed(state, dirs, dirType) {
   const oldDir = state.getIn(['directories', dirType]);
 
@@ -119,10 +131,22 @@ function resetWizard(state) {
   return state.set('propertyData', Map()).set('addPropertyData', Map());
 }
 
+function gitUpdateDone(state) {
+  console.log('git update done');
+  return state;
+}
+
+function gitUpdateError(state) {
+  console.error(err);
+  return state;
+}
+
 export default function(state = Map(), action) {
   switch (action.type) {
     case 'SET_DIRECTORY':
       return setDirectories(state, action.dirType, action.dirName);
+    case 'SET_CONFIG':
+      return setConfig(state, action.configProps);
     case 'DIRECTORY_PARSED':
       return directoryParsed(state, action.dirs, action.dirType);
     case 'DIRECTORY_PARSED_ERRS':
@@ -141,6 +165,10 @@ export default function(state = Map(), action) {
       return fileModificationErr(state, action.err);
     case 'RESET_WIZARD':
       return resetWizard(state);
+    case 'GIT_UPDATE_DONE':
+      return gitUpdateDone(state);
+    case 'GIT_UPDATE_ERROR':
+      return gitUpdateError(state);
   }
   return state;
 }

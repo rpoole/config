@@ -20,6 +20,9 @@ const initialState = Map({
     test: Map({type: 'test', data: null, lastUpdate: null,}),
     dev: Map({type: 'dev', data: data, lastUpdate: 'now', path: '/Users/rpoole/code/sxconfig_test'}),
   }),
+  gitPubKeyFile: null,
+  gitPrivateKeyFile: null,
+  gitPassword: null,
   views: new Map({
     editConfig: false,
     addSelectProperty: true,

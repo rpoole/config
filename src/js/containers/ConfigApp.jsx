@@ -35,11 +35,13 @@ export class ConfigApp extends React.Component {
         <div className="header">
           <TitleBarContainer />
         </div>
-        <div className="sidebar">
-          <SideNavContainer />
-        </div>
-        <div className="main">
-          { this.renderMainPanel() }
+        <div className="wrapper">
+          <div className="sidebar">
+            <SideNavContainer />
+          </div>
+          <div className="main">
+            { this.renderMainPanel() }
+          </div>
         </div>
       </div>
     </div>

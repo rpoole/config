@@ -1,10 +1,9 @@
-export function setDirectories(dirType, dirName) {                                                                                                                                                  
-  return {                                                                                                                                                                                
-    type: 'SET_DIRECTORY',
-    dirType,
-    dirName
-  }                                                                                                                                                                                       
-}                                                                                                                                                                                         
+export function setConfig(configProps) {
+  return {
+    type: 'SET_CONFIG',
+    configProps,
+  }
+}
 
 export function toggleConfig() {                                                                                                                                                  
   return {                                                                                                                                                                                

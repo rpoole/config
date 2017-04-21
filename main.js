@@ -11,12 +11,12 @@ app.on('window-all-closed', () => {
 });
 
 app.on('ready', () => {
-  mainWindow = new BrowserWindow({width: 1100, height: 800});
+  mainWindow = new BrowserWindow({width: 1100, height: 750, titleBarStyle: 'hidden'});
   mainWindow.loadURL('file://' + __dirname + '/index.html');
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
 
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
   registerEvents();
 });

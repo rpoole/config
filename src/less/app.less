@@ -18,23 +18,32 @@ html, body {
 }
 
 #app {
-  display: flex;
-  flex-flow: row wrap;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .header {
-  flex-basis: 100%;
+  height: 95px;
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  height: 100%;
 }
 
 .main, .sidebar {
-  min-height: 800px;
+  // set this to be the desired (50)
+  // + 95 (height of header) because
+  // flexbox has issues with overflow
+  padding-bottom: 145px;
 }
 
 .main {
   flex: 4;
-  order: 3;
+  order: 2;
+  overflow-y: scroll;
   padding-right: 50px;
-  overflow-y: auto;
   background-color: white;
   padding-left: 30px;
   padding-top: 10px;
@@ -45,10 +54,6 @@ html, body {
   flex: 1;
   order: 1;
   padding-top: 30px;
-
-  &.sidebar-right {
-    order: 3;
-  }
 }
 
 .breadcrumbs {
@@ -97,10 +102,12 @@ html, body {
   display: flex;
   flex-flow: row;
   align-items: center;
+  -webkit-app-region: drag;
 
   .logo {
     flex: 1;
     order: 1;
+    padding-top: 15px;
 
     img {
       display: block;
@@ -122,6 +129,7 @@ html, body {
     padding-left: 30px;
     > button {
       margin-right: 20px;
+      -webkit-app-region: no-drag;
     }
 
   }
@@ -205,6 +213,10 @@ html, body {
   #edit-config-update {
     margin-top: 10px;
     text-align: center;
+  }
+
+  .dir-picker-row {
+    margin-bottom: 15px;
   }
 }
 
