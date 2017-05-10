@@ -1,2 +1,4 @@
 node_modules
 src/css
+.DS_STORE
+npm-debug.log
