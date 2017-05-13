@@ -7,8 +7,7 @@ const mapStateToProps = (state) => {
     selectedFiles: state.getIn(['propertyData', 'selectedFiles']),
     method: state.getIn(['propertyData', 'method']),
     propertyName: state.getIn(['propertyData', 'propertyName']),
-    fileModifications: state.getIn(['addPropertyData', 'fileModifications']),
-    addPropertyData: state.get('addPropertyData'),
+    fileModifications: state.getIn(['propertyData', 'fileModifications']),
   };
 };
 

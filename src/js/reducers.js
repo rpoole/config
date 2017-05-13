@@ -99,8 +99,8 @@ function matchFiles(state, propertyName, environments, project, filename) {
 }
 
 function setFileModifications(state, modifications) {
-  const oldAddData = state.get('addPropertyData');
-  return state.set('addPropertyData', oldAddData.merge({
+  const oldData = state.get('propertyData');
+  return state.set('propertyData', oldData.merge({
     fileModifications: modifications,
     finishedFileModifications: [],
   }));
@@ -108,7 +108,7 @@ function setFileModifications(state, modifications) {
 
 function fileModificationDone(state, path) {
   let finishedMod = null;
-  const newMods = state.getIn(['addPropertyData', 'fileModifications']).filter( m => {
+  const newMods = state.getIn(['propertyData', 'fileModifications']).filter( m => {
     if (m.get('path') === path) {
       finishedMod = m;
     }
@@ -116,10 +116,10 @@ function fileModificationDone(state, path) {
     return m.get('path') !== path;
   });
 
-  const newFinishedMods = state.getIn(['addPropertyData', 'finishedFileModifications']).push(finishedMod);
+  const newFinishedMods = state.getIn(['propertyData', 'finishedFileModifications']).push(finishedMod);
 
-  return state.setIn(['addPropertyData', 'fileModifications'], newMods)
-    .setIn(['addPropertyData', 'finishedFileModifications'], newFinishedMods);
+  return state.setIn(['propertyData', 'fileModifications'], newMods)
+    .setIn(['propertyData', 'finishedFileModifications'], newFinishedMods);
 }
 
 function fileModificationErr(state, err) {
@@ -128,7 +128,7 @@ function fileModificationErr(state, err) {
 }
 
 function resetWizard(state) {
-  return state.set('propertyData', Map()).set('addPropertyData', Map());
+  return state.set('propertyData', Map());
 }
 
 function gitUpdateDone(state) {

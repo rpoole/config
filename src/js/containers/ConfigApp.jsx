@@ -7,9 +7,11 @@ import TitleBarContainer from './TitleBar';
 import EditConfigContainer from './EditConfig';
 import AddSelectProperty from '../components/AddSelectProperty';
 import RemoveSelectProperty from '../components/RemoveSelectProperty';
+import RemovePropertyListFilesContainer from '../containers/RemovePropertyListFiles';
+import RemovePropertyExecuteModifications from '../components/RemovePropertyExecuteModifications';
 import AddPropertyListChangedFilesContainer from './AddPropertyListChangedFiles';
 import AddPropertyAddToFilesContainer from './AddPropertyAddToFiles'
-import AddPropertyExecuteModificationsContainer from './AddPropertyExecuteModifications'
+import AddPropertyExecuteModifications from '../components/AddPropertyExecuteModifications'
 import SideNavContainer from './SideNav';
 
 import {currentView} from './selectors';
@@ -20,10 +22,12 @@ export class ConfigApp extends React.Component {
     const viewMap = {
       editConfig: <EditConfigContainer />,
       addSelectProperty: <AddSelectProperty />,
-      removeSelectProperty: <RemoveSelectProperty />,
       addPropertyListChangedFiles: <AddPropertyListChangedFilesContainer />,
       addPropertyAddToFiles: <AddPropertyAddToFilesContainer />,
-      addPropertyExecuteModifications: <AddPropertyExecuteModificationsContainer />,
+      addPropertyExecuteModifications: <AddPropertyExecuteModifications />,
+      removeSelectProperty: <RemoveSelectProperty />,
+      removePropertyListFiles: <RemovePropertyListFilesContainer />,
+      removePropertyExecuteModifications: <RemovePropertyExecuteModifications />,
     };
 
     return viewMap[this.props.currentView];

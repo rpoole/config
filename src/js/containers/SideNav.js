@@ -16,9 +16,9 @@ const sideNavMap = {
   remove: [{
     display: 'Property Info', viewValue: 'removeSelectProperty',
   },{
-    display: 'Changed Files', viewValue: 'addPropertyListChangedFiles',
+    display: 'Changed Files', viewValue: 'removePropertyListFiles',
   },{
-    display: 'Execute', viewValue: 'addPropertyExecuteModifications',
+    display: 'Execute', viewValue: 'removePropertyExecuteModifications',
   }],
 };
 

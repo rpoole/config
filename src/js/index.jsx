@@ -30,6 +30,8 @@ const initialState = Map({
     addPropertyAddToFiles: false,
     addPropertyExecuteModifications: false,
     removeSelectProperty: false,
+    removePropertyListFiles: false,
+    removePropertyExecuteModifications: false,
   }),
   propertyData: Map({
     propertyName: 'SOME_NAME',
@@ -38,8 +40,6 @@ const initialState = Map({
     filename: '^(\\.migrate)?.properties',
     selectedFiles: null,
     method: 'applyToAllFiles',
-  }),
-  addPropertyData: Map({
     fileModifications: List(),
     finishedFileModifications: List(),
   }),

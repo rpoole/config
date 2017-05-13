@@ -1,6 +1,6 @@
 import { delay } from 'redux-saga'
 import { put, takeEvery, select } from 'redux-saga/effects'
-import { getDirectories, getAddPropertyData, getPropertyData } from './selectors'
+import { getDirectories, getPropertyData } from './selectors'
 
 import ipc from '../ipc/renderer'
 
